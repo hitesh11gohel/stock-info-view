@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  background-color: #4F38F7;
+  font-family: 'Poppins', sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.no-margin { margin:0;}
+.purple { color: #4F38F7;}
+
+
+/* .MuiBox-root.css-pnhz0d {
+  width: -webkit-fill-available;
+} */
+
+
