@@ -55,7 +55,6 @@ const Buy = (props) => {
     setBuyDetail({ ...buyDetail, [name]: value });
 
     if (name === "code") {
-      // console.log('Value', value);
       clearTimeout(timeout.current);
       if (value) {
         timeout.current = setTimeout(() => {
