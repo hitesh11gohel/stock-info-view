@@ -58,10 +58,8 @@ const Dashboard = (props) => {
     document.getElementById("appBar-container").style.display = "block";
     let isMounted = true;
     if (!localStorage.getItem("token")) {
-      navigate("/login");
-    }
-
-    if (props.getStockData.length > 0) {
+      return navigate("/login");
+    } else if (props.getStockData.length > 0) {
       setApiData(props.getStockData);
     } else {
       if (isMounted) {
@@ -78,7 +76,7 @@ const Dashboard = (props) => {
         axios({
           method: "POST",
           url: getPurchasedAllStocks,
-          data: { userId: user.userId },
+          data: { userId: user?.userId },
         })
           .then((res) => {
             setIsLoading(false);
