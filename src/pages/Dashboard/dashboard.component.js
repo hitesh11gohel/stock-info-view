@@ -8,6 +8,7 @@ import axios from "axios";
 import BottomPanel from "../../components/BottomPanel/BottomPanel";
 import { getAllStockDetails } from "../../Redux/Actions/action";
 import { connect } from "react-redux";
+import { getPurchasedAllStocks, getStockes } from "../../service";
 
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const Dashboard = (props) => {
         //     }).catch((err) => console.error('Catch Error :', err));
         axios({
           method: "POST",
-          url: "http://localhost:8080/stock/get-all-purchased-stock",
+          url: getPurchasedAllStocks,
           data: { userId: user.userId },
         })
           .then((res) => {
@@ -88,7 +89,7 @@ const Dashboard = (props) => {
             console.error("get-all-purchased-stock Error :", err);
           });
 
-        axios({ method: "GET", url: "http://localhost:8080/stock/get" })
+        axios({ method: "GET", url: getStockes })
           .then((stockRes) => {
             setIsLoading(false);
             setLiveData(stockRes.data);

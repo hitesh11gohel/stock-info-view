@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import { AccountCircle } from '@mui/icons-material';
 import axios from "axios";
 import swal from "sweetalert";
+import { addUser } from "../../service";
 
 const RegisterComp = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const RegisterComp = () => {
     console.log("hook-form :", data);
     axios({
       method: "POST",
-      url: "http://localhost:8080/users/add",
+      url: addUser,
       data: data,
     })
       .then((res) => {

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BottomPanel from "../../components/BottomPanel/BottomPanel";
 import "./Sell.css";
 import axios from "axios";
+import { getPurchasedSingleStock, sellStock } from "../../service";
 
 const Sell = (props) => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const Sell = (props) => {
 
           axios({
             method: "GET",
-            url: "http://localhost:8080/buy/get",
+            url: getPurchasedSingleStock,
           })
             .then((res) => {
               const stock = res.data.data.find((item) => item.code === value);
@@ -108,7 +109,7 @@ const Sell = (props) => {
     } else {
       axios({
         method: "POST",
-        url: "http://localhost:8080/sell/add",
+        url: sellStock,
         data: { date, name, code, quantity, price, total, userId },
       })
         .then((res) => {

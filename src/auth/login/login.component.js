@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import LOGO from "../../assets/logo.png";
+import { signIn } from "../../service";
 // import { AccountCircle } from '@mui/icons-material';
 
 const Login = () => {
@@ -31,7 +32,7 @@ const Login = () => {
   const onSubmit = (data) => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/auth/signin",
+      url: signIn,
       data: data,
     })
       .then((res) => {

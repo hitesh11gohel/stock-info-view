@@ -7,6 +7,7 @@ import "./Buy.css";
 import axios from "axios";
 import { addSinglePurchaseShare } from "../../Redux/Actions/action";
 import { connect } from "react-redux";
+import { buyStock, getStockFromServer } from "../../service";
 
 const Buy = (props) => {
   const navigate = useNavigate();
@@ -29,7 +30,6 @@ const Buy = (props) => {
     total: "",
   });
   const [disableBtn, setDisableBtn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const timeout = useRef();
 
   // validation function for input
@@ -59,18 +59,16 @@ const Buy = (props) => {
       if (value) {
         timeout.current = setTimeout(() => {
           setDisableBtn(true);
-          setIsLoading(true);
           // let check = allBuyData.filter((data) => data.code === value);
           // console.log('Check', check);
 
           axios({
             method: "POST",
-            url: "http://localhost:8080/stock/get-yahoo-data",
+            url: getStockFromServer,
             data: { symbol: [value] },
           })
             .then((res) => {
               const { fullName, currentPrice } = res.data[0];
-              setIsLoading(false);
               setDisableBtn(false);
               setBuyDetail({
                 ...buyDetail,
@@ -81,7 +79,6 @@ const Buy = (props) => {
             })
             .catch((err) => {
               setDisableBtn(false);
-              setIsLoading(false);
               console.error("Error :", err);
             });
         }, 1000);
@@ -113,7 +110,7 @@ const Buy = (props) => {
       setDisableBtn(true);
       axios({
         method: "POST",
-        url: "http://localhost:8080/buy/add",
+        url: buyStock,
         data: { date, name, code, quantity, price, total, userId },
       })
         .then((res) => {
