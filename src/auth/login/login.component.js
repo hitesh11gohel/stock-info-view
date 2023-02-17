@@ -8,11 +8,12 @@ import axios from "axios";
 import swal from "sweetalert";
 import LOGO from "../../assets/logo.png";
 import { signIn } from "../../service";
+import CircularProgress from "@mui/material/CircularProgress";
 // import { AccountCircle } from '@mui/icons-material';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [passwordShown] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,12 +31,14 @@ const Login = () => {
   }, []);
 
   const onSubmit = (data) => {
+    setDisableBtn(true);
     axios({
       method: "POST",
       url: signIn,
       data: data,
     })
       .then((res) => {
+        setDisableBtn(false);
         const { authKey, fname, lname, email, phone, userId } = res.data.data;
         localStorage.setItem("token", authKey);
         localStorage.setItem(
@@ -46,6 +49,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((err) => {
+        setDisableBtn(false);
         setError({ apiResError: "Invalid Credentials" });
       });
   };
@@ -89,6 +93,7 @@ const Login = () => {
                 className="form-control input-field"
                 aria-describedby="emailHelp"
                 placeholder="Enter your username"
+                defaultValue={"karl@gmail.com"}
                 name="email"
                 {...register("email", {
                   required: {
@@ -109,9 +114,10 @@ const Login = () => {
             </div>
             <div className="mb-3">
               <input
-                type={passwordShown ? "text" : "password"}
+                type={"password"}
                 placeholder="Enter your password"
                 name="password"
+                defaultValue={"test@123"}
                 className="form-control input-field"
                 {...register("password", {
                   required: {
@@ -152,7 +158,11 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary rounded-pill px-4 w-100 login-btn btn-lg"
                 >
-                  Sign in
+                  {disableBtn ? (
+                    <CircularProgress color="inherit" size={"18px"} />
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
               </div>
               <span

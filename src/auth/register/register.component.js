@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./register.component.css";
 import { useForm } from "react-hook-form";
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, CircularProgress, Grid, Paper } from "@mui/material";
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link, useNavigate } from "react-router-dom";
 // import { AccountCircle } from '@mui/icons-material';
@@ -11,7 +11,7 @@ import { addUser } from "../../service";
 
 const RegisterComp = () => {
   const navigate = useNavigate();
-  const [passwordShown] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
   // const [formData, setFormData] = useState({  fname: '', lname: '', email: '', phone: '', password: '', cpassword: '' });
   const {
     register,
@@ -20,14 +20,14 @@ const RegisterComp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("hook-form :", data);
+    setDisableBtn(true);
     axios({
       method: "POST",
       url: addUser,
       data: data,
     })
       .then((res) => {
-        console.log("kirtna:", res);
+        setDisableBtn(false);
         if (res.status === 201) {
           swal("Good job!", "Registration Successful!", "success");
           navigate("/");
@@ -36,6 +36,7 @@ const RegisterComp = () => {
         }
       })
       .catch((err) => {
+        setDisableBtn(false);
         console.log("Register Error :", err);
       });
 
@@ -193,7 +194,7 @@ const RegisterComp = () => {
               <Grid item md={6} xs={12}>
                 <div className="mb-3">
                   <input
-                    type={passwordShown ? "text" : "password"}
+                    type={"password"}
                     placeholder="Password"
                     name="password"
                     // value={formData.password}
@@ -221,7 +222,7 @@ const RegisterComp = () => {
               <Grid item md={6} xs={12}>
                 <div className="mb-3">
                   <input
-                    type={passwordShown ? "text" : "password"}
+                    type={"password"}
                     placeholder="Confirm Password"
                     name="cpassword"
                     // value={formData.cpassword}
@@ -254,7 +255,11 @@ const RegisterComp = () => {
                   type="submit"
                   className="btn btn-primary rounded-pill px-4 w-75 register-btn btn-lg"
                 >
-                  Create Account
+                  {disableBtn ? (
+                    <CircularProgress color="inherit" size={"18px"} />
+                  ) : (
+                    "Create Account"
+                  )}
                 </button>
               </div>
               <span
