@@ -261,7 +261,7 @@ const RegisterComp = () => {
                 style={{ marginTop: "10px", textAlign: "center" }}
               >
                 Already have an account?{" "}
-                <Link className="link-tag" to="/">
+                <Link className="link-tag" to="/login">
                   Sign in
                 </Link>
               </span>

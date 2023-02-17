@@ -15,7 +15,6 @@ const Dashboard = (props) => {
   let [apiData, setApiData] = useState([]);
   let [liveData, setLiveData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const userId = useState(user.userId);
 
   // get live stock price and 52WeeksHigh and 52WeeksLow data
   // const getLiveData = async (params) => {
@@ -78,7 +77,7 @@ const Dashboard = (props) => {
         axios({
           method: "POST",
           url: "http://localhost:8080/stock/get-all-purchased-stock",
-          data: { userId: userId },
+          data: { userId: user.userId },
         })
           .then((res) => {
             setIsLoading(false);

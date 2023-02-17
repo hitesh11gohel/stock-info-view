@@ -6,6 +6,7 @@ import { Box, Paper } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import LOGO from "../../assets/logo.png";
 // import { AccountCircle } from '@mui/icons-material';
 
 const Login = () => {
@@ -69,6 +70,14 @@ const Login = () => {
           component={Paper}
         >
           <div className="mb-4">
+            <div className="text-center fw-bold mb-4">
+              <img
+                src={LOGO}
+                alt="..."
+                className="bg-primary p-2 rounded"
+                width={"100"}
+              />
+            </div>
             <h2 className="text-center fw-bold">Sign In</h2>
             <h5 className="text-danger text-center">{error.apiResError}</h5>
           </div>

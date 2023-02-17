@@ -26,7 +26,7 @@ export default function MenuAppBar() {
     setAnchorEl(null);
     if (value === "logout") {
       localStorage.clear();
-      navigate("/");
+      navigate("/login");
     }
   };
 

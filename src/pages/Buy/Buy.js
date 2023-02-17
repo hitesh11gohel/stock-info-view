@@ -139,7 +139,7 @@ const Buy = (props) => {
     <>
       <div className="buy-container">
         <Backdrop
-          open={isLoading}
+          open={disableBtn}
           sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
         >
           <CircularProgress color="inherit" />
