@@ -156,6 +156,7 @@ const Login = () => {
               <div className="text-center">
                 <button
                   type="submit"
+                  disabled={disableBtn}
                   className="btn btn-primary rounded-pill px-4 w-100 login-btn btn-lg"
                 >
                   {disableBtn ? (

@@ -253,6 +253,7 @@ const RegisterComp = () => {
               <div className="text-center">
                 <button
                   type="submit"
+                  disabled={disableBtn}
                   className="btn btn-primary rounded-pill px-4 w-75 register-btn btn-lg"
                 >
                   {disableBtn ? (
